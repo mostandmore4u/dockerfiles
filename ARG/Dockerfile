@@ -6,5 +6,4 @@ ARG course="docker" \
 # ENV course=${course} \
 #     duration=${duration} \
 #     trainer=${trainer}
-RUN echo "Course is: ${course}, Duration is: ${duration}, Trainer is: ${trainer}"
-#, Version is: ${version}
+RUN echo "Course is: ${course}, Duration is: ${duration}, Trainer is: ${trainer}, Version is: ${version}"
