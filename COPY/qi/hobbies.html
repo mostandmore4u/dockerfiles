@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hobbies</title>
+    <!-- Importing Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === CSS VARIABLES FOR DARK COLORFUL PALETTE === */
+        :root {
+            --bg-color: #111827; 
+            --card-bg: #1f2937; 
+            
+            /* Brightened Colorful Accents for Hobbies */
+            --color-cricket: #3b82f6; /* Blue */
+            --color-badminton: #ef4444; /* Red */
+            --color-chess: #f59e0b; /* Amber/Gold */
+            --color-swim: #06b6d4; /* Cyan */
+            --color-books: #8b5cf6; /* Violet */
+            
+            --text-dark: #f9fafb; 
+            --text-light: #9ca3af; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 3rem 1rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--color-cricket), var(--color-books));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* === HOBBIES GRID === */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .hobby-card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+            border: 1px solid #374151;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-8px);
+        }
+
+        /* Individual Card Colors */
+        .card-cricket { border-top: 5px solid var(--color-cricket); }
+        .card-cricket:hover { box-shadow: 0 15px 35px rgba(59, 130, 246, 0.2); }
+        
+        .card-badminton { border-top: 5px solid var(--color-badminton); }
+        .card-badminton:hover { box-shadow: 0 15px 35px rgba(239, 68, 68, 0.2); }
+        
+        .card-chess { border-top: 5px solid var(--color-chess); }
+        .card-chess:hover { box-shadow: 0 15px 35px rgba(245, 158, 11, 0.2); }
+
+        .card-swim { border-top: 5px solid var(--color-swim); }
+        .card-swim:hover { box-shadow: 0 15px 35px rgba(6, 182, 212, 0.2); }
+
+        .card-books { border-top: 5px solid var(--color-books); }
+        .card-books:hover { box-shadow: 0 15px 35px rgba(139, 92, 246, 0.2); }
+
+        /* Emoji Icon Styling */
+        .hobby-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: #374151;
+            width: 90px;
+            height: 90px;
+            line-height: 90px;
+            border-radius: 50%;
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .hobby-card h2 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hobby-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Nav back */
+        .back-nav {
+            text-align: center;
+            margin-top: 4rem;
+        }
+        
+        .btn-back {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 2px solid #4b5563;
+            color: var(--text-dark);
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: #4b5563;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <div class="header">
+            <h1>My Passions & Hobbies</h1>
+            <p style="color: var(--text-light); font-size: 1.1rem; margin-top: 0.5rem;">What I do when I'm away from the keyboard.</p>
+        </div>
+
+        <div class="hobbies-grid">
+            
+            <!-- Cricket -->
+            <div class="hobby-card card-cricket">
+                <div class="hobby-icon">🏏</div>
+                <h2>Cricket</h2>
+                <p>A true enthusiast of the game. Whether playing on the pitch or analyzing the match, cricket is a lifelong passion.</p>
+            </div>
+
+            <!-- Badminton -->
+            <div class="hobby-card card-badminton">
+                <div class="hobby-icon">🏸</div>
+                <h2>Badminton</h2>
+                <p>Love the speed and agility required for the sport. It keeps me active, focused, and always ready to move.</p>
+            </div>
+
+            <!-- Chess -->
+            <div class="hobby-card card-chess">
+                <div class="hobby-icon">♟️</div>
+                <h2>Chess</h2>
+                <p>Strategic thinking off the clock. Chess sharpens my mind and helps me tackle complex problems step-by-step.</p>
+            </div>
+
+            <!-- Swimming -->
+            <div class="hobby-card card-swim">
+                <div class="hobby-icon">🏊‍♂️</div>
+                <h2>Swimming</h2>
+                <p>My favorite way to decompress and stay fit. Nothing beats the refreshing feeling of a great swim.</p>
+            </div>
+
+            <!-- Reading -->
+            <div class="hobby-card card-books">
+                <div class="hobby-icon">📚</div>
+                <h2>Reading</h2>
+                <p>Constantly learning and growing. I love diving into self-help books to expand my perspective and mindset.</p>
+            </div>
+
+        </div>
+
+        <div class="back-nav">
+            <a href="index.html" class="btn-back">← Back to Home</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

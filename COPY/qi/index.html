@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subbarao's Personal Site</title>
+    <!-- Importing Google Fonts for a modern typography look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === CSS VARIABLES FOR DARK COLORFUL PALETTE === */
+        :root {
+            --bg-color: #111827; /* Dark slate page background */
+            --card-bg: #1f2937; /* Slightly lighter dark gray for divs/cards */
+            
+            /* Brightened Colorful Accents for Dark Mode */
+            --dark-indigo: #6366f1; /* Vivid Indigo */
+            --dark-magenta: #ec4899; /* Vivid Pink */
+            --dark-emerald: #10b981; /* Vivid Emerald */
+            --dark-violet: #8b5cf6; /* Vivid Violet */
+            
+            --text-dark: #f9fafb; /* Changed to white/light gray for readability */
+            --text-light: #9ca3af; /* Medium light gray */
+        }
+
+        /* === GLOBAL STYLES === */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 3rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        a {
+            color: var(--dark-indigo);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--dark-magenta);
+        }
+
+        /* === CARD LAYOUT === */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            /* Subtle shadow to separate cards from dark background */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            border: 1px solid #374151;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Adding colorful dark top borders to each card */
+        .card:nth-child(1) { border-top: 5px solid var(--dark-indigo); }
+        .card:nth-child(2) { border-top: 5px solid var(--dark-magenta); }
+        .card:nth-child(3) { border-top: 5px solid var(--dark-emerald); }
+        .card:nth-child(4) { border-top: 5px solid var(--dark-violet); }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        h2 {
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Glowing animation for the DevOps infinity symbol */
+        @keyframes pulse-glow {
+            0% { filter: drop-shadow(0 0 2px currentColor); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 10px currentColor); transform: scale(1.05); }
+            100% { filter: drop-shadow(0 0 2px currentColor); transform: scale(1); }
+        }
+
+        .devops-infinity {
+            animation: pulse-glow 3s infinite;
+        }
+
+        /* Coloring the specific headers */
+        .card:nth-child(2) h2 { color: var(--dark-magenta); }
+        .card:nth-child(3) h2 { color: var(--dark-emerald); }
+        .card:nth-child(4) h2 { color: var(--dark-violet); }
+
+        /* === PROFILE HEADER === */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--dark-indigo);
+            box-shadow: 0 10px 20px rgba(49, 46, 129, 0.2);
+        }
+
+        .profile-info h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 0.2rem;
+            /* Dark gradient text for the name */
+            background: linear-gradient(to right, var(--dark-indigo), var(--dark-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .profile-info .subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .profile-info .bio {
+            font-weight: 400;
+            color: var(--text-dark);
+        }
+
+        /* === LISTS & TABLES === */
+        ul.custom-list {
+            list-style: none;
+        }
+
+        ul.custom-list li {
+            position: relative;
+            padding-left: 0;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .icon-bullet {
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: #374151; /* Dark background for icons */
+            border-radius: 8px;
+            flex-shrink: 0;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* === RESPONSIVE GRIDS (Replaced Tables) === */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .grid-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #374151;
+            padding: 1.2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background 0.3s ease;
+        }
+
+        .grid-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .expertise-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .expertise-title {
+            font-weight: 800;
+            color: var(--dark-emerald);
+            font-size: 1.1rem;
+        }
+
+        .expertise-desc {
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .skill-name {
+            font-weight: 800;
+            color: var(--dark-violet);
+        }
+
+        /* === BUTTONS === */
+        .btn-container {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--dark-indigo), var(--dark-violet));
+            color: white !important;
+            border-radius: 50px; /* Pill shape */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(76, 29, 149, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(76, 29, 149, 0.4);
+            background: linear-gradient(135deg, var(--dark-violet), var(--dark-magenta));
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--dark-indigo) !important;
+            border: 2px solid var(--dark-indigo);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-indigo);
+            color: white !important;
+        }
+
+        /* === RESPONSIVE DESIGN === */
+        @media (max-width: 600px) {
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-img {
+                width: 140px;
+                height: 140px;
+            }
+            .profile-info h1 {
+                font-size: 2.2rem;
+            }
+            .btn-container {
+                flex-direction: column;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr; /* Stack skills vertically on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header Section -->
+        <header class="card profile-header">
+            <img src="SUBBU.png" alt="Subbarao P" class="profile-img" onerror="this.src='https://via.placeholder.com/160?text=Subbu'">
+            <div class="profile-info">
+                <h1>Subbarao P</h1>
+                <p class="subtitle">
+                    Founder and CEO of <strong><a href="https://www.linkedin.com/company/evolution-technologies-dba" target="_blank">Evolution Technologies</a></strong>
+                </p>
+                <p class="bio">
+                    I am a DevSecOps & Cloud Architect. I build secure, scalable cloud-native infrastructure, automate CI/CD pipelines, and implement AIOps on AWS.
+                </p>
+            </div>
+        </header>
+
+        <!-- DevSecOps Roadmap Section -->
+        <section class="card">
+            <h2>
+                DevSecOps Expertise
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="devops-infinity">
+                    <path d="M18.178 8c5.096 0 5.096 8 0 8-5.095 0-7.133-8-12.739-8-4.585 0-4.585 8 0 8 5.606 0 7.644-8 12.74-8z"></path>
+                </svg>
+            </h2>
+            <ul class="custom-list">
+                <li><span class="icon-bullet">🐧</span> Linux OS Administration, BASH & Python Scripting</li>
+                <li><span class="icon-bullet">🐳</span> Containerization & Orchestration (Docker & Kubernetes/EKS)</li>
+                <li><span class="icon-bullet">🏗️</span> Infrastructure as Code (Terraform) & Configuration Management (Ansible)</li>
+                <li><span class="icon-bullet">🚀</span> CI/CD Pipelines (Jenkins, GitHub Actions) & GitOps (ArgoCD)</li>
+                <li><span class="icon-bullet">🧠</span> AIOps & Observability (Prometheus, Grafana, ELK Stack)</li>
+            </ul>
+        </section>
+
+        <!-- AWS & Security Expertise Section -->
+        <section class="card">
+            <h2>
+                AWS & Security Expertise
+                <span style="font-size: 1.8rem; line-height: 1;">☁️</span>
+            </h2>
+            <div class="expertise-grid">
+                <div class="grid-item expertise-item">
+                    <span class="expertise-title">AWS Cloud</span>
+                    <span class="expertise-desc">🌩️ VPC, EC2, EKS, S3, IAM, Route53, CloudFront, Lambda</span>
+                </div>
+                <div class="grid-item expertise-item">
+                    <span class="expertise-title">Security</span>
+                    <span class="expertise-desc">🛡️ SonarQube (SAST), Veracode (DAST), DevSecOps Integration</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="card">
+            <h2>
+                Technical Skills
+                <span style="font-size: 1.8rem; line-height: 1;">⚙️</span>
+            </h2>
+            <div class="skills-grid">
+                <div class="grid-item">
+                    <span class="skill-name">🚢 Docker & K8s</span>
+                    <span>⭐⭐⭐⭐⭐</span>
+                </div>
+                <div class="grid-item">
+                    <span class="skill-name">☁️ AWS Cloud</span>
+                    <span>⭐⭐⭐⭐⭐</span>
+                </div>
+                <div class="grid-item">
+                    <span class="skill-name">🛠️ Terraform & Ansible</span>
+                    <span>⭐⭐⭐⭐</span>
+                </div>
+                <div class="grid-item">
+                    <span class="skill-name">♾️ CI/CD & GitOps</span>
+                    <span>⭐⭐⭐⭐</span>
+                </div>
+                <div class="grid-item">
+                    <span class="skill-name">🐍 Python & BASH</span>
+                    <span>⭐⭐⭐</span>
+                </div>
+                <div class="grid-item">
+                    <span class="skill-name">📈 AIOps & Monitoring</span>
+                    <span>⭐⭐⭐</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Navigation / Action Links -->
+        <div class="btn-container">
+            <a href="hobbies.html" class="btn">My Hobbies</a>
+            <a href="photo-gallery.html" class="btn">📸 Photo Vault</a>
+            <a href="ContactDetails.html" class="btn btn-secondary">Contact Details</a>
+        </div>
+    </div>
+
+</body>
+</html>

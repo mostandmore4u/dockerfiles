@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Details</title>
+    <!-- Importing Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === CSS VARIABLES FOR DARK COLORFUL PALETTE === */
+        :root {
+            --bg-color: #111827; 
+            --card-bg: #1f2937; 
+            --dark-indigo: #6366f1; 
+            --dark-magenta: #ec4899; 
+            --text-dark: #f9fafb; 
+            --text-light: #9ca3af; 
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4); 
+            border: 1px solid #374151;
+            border-top: 5px solid var(--dark-indigo);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--dark-indigo), var(--dark-magenta));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+        }
+
+        /* === BUTTONS === */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--dark-indigo), var(--dark-magenta));
+            color: white !important;
+            border-radius: 50px; 
+            font-weight: 600;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+        }
+
+        .btn-back {
+            display: inline-block;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-back:hover {
+            color: var(--dark-indigo);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <span style="font-size: 3rem; display: block; margin-bottom: 1rem;">📬</span>
+            <h1>Get in Touch</h1>
+            <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions.</p>
+            
+            <!-- EDIT YOUR EMAIL ADDRESS HERE IN BOTH PLACES -->
+            <a href="mailto:youremail@example.com" class="btn">Email Me</a>
+            
+            <br>
+            <a href="index.html" class="btn-back">← Back to Portfolio</a>
+        </div>
+    </div>
+
+</body>
+</html>
