@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    <!-- Importing Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* === CSS VARIABLES FOR DARK COLORFUL PALETTE === */
+      :root {
+        --bg-color: #111827;
+        --card-bg: #1f2937;
+        --dark-indigo: #6366f1;
+        --dark-magenta: #ec4899;
+        --dark-emerald: #10b981;
+        --text-dark: #f9fafb;
+        --text-light: #9ca3af;
+        --error-color: #ef4444;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        line-height: 1.6;
+        min-height: 100vh;
+      }
+
+      /* === LOGIN SCREEN === */
+      #login-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+
+      .login-card {
+        background-color: var(--card-bg);
+        border-radius: 16px;
+        padding: 3rem 2.5rem;
+        text-align: center;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        border: 1px solid #374151;
+        border-top: 5px solid var(--dark-indigo);
+      }
+
+      .login-card h1 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(
+          to right,
+          var(--dark-indigo),
+          var(--dark-magenta)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .lock-icon {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        display: inline-block;
+      }
+
+      .password-input {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        border: 2px solid #374151;
+        background: #111827;
+        color: white;
+        font-size: 1.1rem;
+        font-family: "Poppins", sans-serif;
+        outline: none;
+        transition: border-color 0.3s ease;
+        text-align: center;
+        letter-spacing: 2px;
+      }
+
+      .password-input:focus {
+        border-color: var(--dark-indigo);
+      }
+
+      .error-msg {
+        color: var(--error-color);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+        display: none; /* Hidden by default */
+      }
+
+      /* === GALLERY SCREEN === */
+      #gallery-section {
+        display: none; /* Hidden until unlocked */
+        padding: 3rem 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .gallery-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #374151;
+      }
+
+      .gallery-header h1 {
+        font-size: 2.2rem;
+        font-weight: 800;
+        background: linear-gradient(
+          to right,
+          var(--dark-emerald),
+          var(--dark-indigo)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .photo-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #374151;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        aspect-ratio: 1 / 1; /* Makes cards perfect squares */
+      }
+
+      .photo-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        border-color: var(--dark-indigo);
+      }
+
+      .photo-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        cursor: pointer;
+      }
+
+      /* === BUTTONS === */
+      .btn {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: linear-gradient(
+          135deg,
+          var(--dark-indigo),
+          var(--dark-magenta)
+        );
+        color: white;
+        border-radius: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+      }
+
+      .btn-lock {
+        background: transparent;
+        color: var(--text-light);
+        border: 2px solid #4b5563;
+        padding: 0.6rem 1.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-lock:hover {
+        background: var(--error-color);
+        border-color: var(--error-color);
+        color: white;
+      }
+
+      /* === LIGHTBOX === */
+      #lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(17, 24, 39, 0.95);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+      }
+      #lightbox-img {
+        max-width: 90%;
+        max-height: 90vh;
+        border-radius: 8px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        border: 2px solid var(--dark-indigo);
+      }
+      .lightbox-btn {
+        position: absolute;
+        background: rgba(31, 41, 55, 0.7);
+        color: white;
+        border: none;
+        font-size: 2rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+      .lightbox-btn:hover {
+        background: var(--dark-indigo);
+        transform: scale(1.1);
+      }
+      #close-btn {
+        top: 20px;
+        right: 20px;
+      }
+      #prev-btn {
+        left: 20px;
+      }
+      #next-btn {
+        right: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- SECURE LOGIN SCREEN -->
+    <div id="login-section">
+      <div class="login-card">
+        <span class="lock-icon">🔒</span>
+        <h1>Gallery</h1>
+        <p style="color: var(--text-light); margin-bottom: 2rem">
+          Please enter your passcode to view photos.
+        </p>
+
+        <input
+          type="password"
+          id="pwd-input"
+          class="password-input"
+          placeholder="Enter Password"
+        />
+        <p id="error-msg" class="error-msg">Incorrect Password! Try again.</p>
+
+        <button id="login-btn" class="btn">Unlock Gallery</button>
+      </div>
+    </div>
+
+    <!-- MAIN GALLERY SCREEN -->
+    <div id="gallery-section">
+      <div class="gallery-header">
+        <h1>📸 My Vault</h1>
+        <button id="lock-btn" class="btn-lock">Lock Vault</button>
+      </div>
+
+      <div id="photo-grid" class="photo-grid">
+        <!-- Photos will be injected here automatically by Javascript -->
+      </div>
+    </div>
+
+    <!-- LIGHTBOX OVERLAY -->
+    <div id="lightbox">
+      <button id="close-btn" class="lightbox-btn">&times;</button>
+      <button id="prev-btn" class="lightbox-btn">&#10094;</button>
+      <img id="lightbox-img" src="" alt="Enlarged Photo" />
+      <button id="next-btn" class="lightbox-btn">&#10095;</button>
+    </div>
+
+    <script>
+      // === CONFIGURATION ===
+      const CORRECT_PASSWORD = "3142";
+      const MAX_PHOTOS_TO_LOAD = 50; // It will try to load up to photo050.jpg
+      const PHOTO_EXTENSION = ".jpg"; // Ensure your uploads are .jpg, or change this to .png
+
+      // === ELEMENTS ===
+      const loginSection = document.getElementById("login-section");
+      const gallerySection = document.getElementById("gallery-section");
+      const pwdInput = document.getElementById("pwd-input");
+      const loginBtn = document.getElementById("login-btn");
+      const errorMsg = document.getElementById("error-msg");
+      const lockBtn = document.getElementById("lock-btn");
+      const photoGrid = document.getElementById("photo-grid");
+
+      // === LIGHTBOX & AUTO-LOCK ELEMENTS ===
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      const closeBtn = document.getElementById("close-btn");
+      const prevBtn = document.getElementById("prev-btn");
+      const nextBtn = document.getElementById("next-btn");
+
+      let inactivityTimer;
+      let validPhotos = [];
+      let currentPhotoIndex = 0;
+      const INACTIVITY_LIMIT = 20000; // 1 minute in milliseconds
+
+      // === EVENT LISTENERS ===
+      loginBtn.addEventListener("click", attemptLogin);
+
+      // Allow pressing "Enter" on the keyboard to submit
+      pwdInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") attemptLogin();
+      });
+
+      lockBtn.addEventListener("click", lockVault);
+
+      // Lightbox Event Listeners
+      closeBtn.addEventListener("click", closeLightbox);
+      prevBtn.addEventListener("click", showPrevPhoto);
+      nextBtn.addEventListener("click", showNextPhoto);
+
+      // Keyboard navigation and Auto-lock tracking
+      document.addEventListener("keydown", function (e) {
+        resetInactivityTimer();
+        if (lightbox.style.display === "flex") {
+          if (e.key === "ArrowRight") showNextPhoto();
+          if (e.key === "ArrowLeft") showPrevPhoto();
+          if (e.key === "Escape") closeLightbox();
+        }
+      });
+
+      // Track activity for auto-lock
+      ["mousemove", "mousedown", "click", "scroll", "touchstart"].forEach(
+        (evt) => {
+          document.addEventListener(evt, resetInactivityTimer);
+        },
+      );
+
+      // === LOGIC ===
+      function lockVault() {
+        closeLightbox();
+        gallerySection.style.display = "none";
+        loginSection.style.display = "flex";
+        pwdInput.value = ""; // clear password
+        photoGrid.innerHTML = ""; // clear photos for security
+        clearTimeout(inactivityTimer);
+      }
+
+      function resetInactivityTimer() {
+        clearTimeout(inactivityTimer);
+        if (gallerySection.style.display === "block") {
+          // Only track if unlocked
+          inactivityTimer = setTimeout(lockVault, INACTIVITY_LIMIT);
+        }
+      }
+
+      function attemptLogin() {
+        if (pwdInput.value === CORRECT_PASSWORD) {
+          // Success
+          errorMsg.style.display = "none";
+          loginSection.style.display = "none";
+          gallerySection.style.display = "block";
+          loadPhotos();
+          resetInactivityTimer(); // Start timer on unlock
+        } else {
+          // Failed
+          errorMsg.style.display = "block";
+          pwdInput.value = "";
+          pwdInput.focus();
+        }
+      }
+
+      function loadPhotos() {
+        photoGrid.innerHTML = ""; // Clear just in case
+
+        // Loop from 1 to MAX_PHOTOS_TO_LOAD
+        for (let i = 1; i <= MAX_PHOTOS_TO_LOAD; i++) {
+          // Pad the number with zeros (1 becomes "001", 12 becomes "012")
+          let numStr = i.toString().padStart(3, "0");
+          let imageFileName = `photo${numStr}${PHOTO_EXTENSION}`;
+
+          // Create the HTML elements
+          let card = document.createElement("div");
+          card.className = "photo-card";
+
+          let img = document.createElement("img");
+          img.src = imageFileName;
+          img.alt = `Gallery Photo ${numStr}`;
+
+          // THE MAGIC TRICK: If the image isn't found on your server, hide the card!
+          img.onerror = function () {
+            this.parentElement.style.display = "none";
+          };
+
+          // Add click event to open lightbox
+          img.addEventListener("click", function () {
+            openLightbox(this.src);
+          });
+
+          card.appendChild(img);
+          photoGrid.appendChild(card);
+        }
+      }
+
+      function openLightbox(src) {
+        // Dynamically get currently visible images
+        const visibleImgs = Array.from(document.querySelectorAll(".photo-card"))
+          .filter((card) => card.style.display !== "none")
+          .map((card) => card.querySelector("img").src);
+
+        validPhotos = visibleImgs;
+        currentPhotoIndex = validPhotos.indexOf(src);
+
+        updateLightboxImage();
+        lightbox.style.display = "flex";
+      }
+
+      function closeLightbox() {
+        lightbox.style.display = "none";
+      }
+
+      function showNextPhoto() {
+        if (validPhotos.length === 0) return;
+        currentPhotoIndex = (currentPhotoIndex + 1) % validPhotos.length;
+        updateLightboxImage();
+      }
+
+      function showPrevPhoto() {
+        if (validPhotos.length === 0) return;
+        currentPhotoIndex =
+          (currentPhotoIndex - 1 + validPhotos.length) % validPhotos.length;
+        updateLightboxImage();
+      }
+
+      function updateLightboxImage() {
+        lightboxImg.src = validPhotos[currentPhotoIndex];
+      }
+    </script>
+  </body>
+</html>
